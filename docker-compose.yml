@@ -1,6 +1,15 @@
 services:
+
   nginx:
     build: .
     ports:
       - "8080:8080"
-    restart: unless-stopped
+    depends_on:
+      - app
+
+  app:
+    image: nginx:alpine
+    volumes:
+      - ./app:/usr/share/nginx/html
+    expose:
+      - "80"
