@@ -1,12 +1,13 @@
+FROM debian:bookworm-slim
 
-FROM alpine:3.22
+RUN apt-get update &&  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends bind9 bind9-utils kea-dhcp4-server bash && rm -rf /var/lib/apt/lists/*
+COPY named.conf /etc/bind/named.conf
+COPY db.lab.test /etc/bind/db.lab.test
+COPY kea-dhcp4.conf /etc/kea/kea-dhcp4.conf
+COPY entrypoint.sh /entrypoint.sh
 
-RUN apk add --no-cache dnsmasq
+RUN chmod +x /entrypoint.sh
 
-COPY dnsmasq.conf /etc/dnsmasq.conf
+EXPOSE 53/tcp 53/udp 67/udp
 
-EXPOSE 53/udp
-EXPOSE 53/tcp
-EXPOSE 67/udp
-
-CMD ["dnsmasq", "--no-daemon", "--conf-file=/etc/dnsmasq.conf"]
+ENTRYPOINT ["/entrypoint.sh"]

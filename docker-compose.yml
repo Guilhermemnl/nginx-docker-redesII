@@ -1,12 +1,14 @@
 
 services:
+ 
   servehttp-1:
     image: nginx:alpine
     container_name: servehttp-1
     volumes:
       - ./serveHTTP-1:/usr/share/nginx/html:ro
     networks:
-      - rede-projeto
+      rede-projeto:
+        ipv4_address: 172.30.0.21
 
   servehttp-2:
     image: nginx:alpine
@@ -14,7 +16,10 @@ services:
     volumes:
       - ./serveHTTP-2:/usr/share/nginx/html:ro
     networks:
-      - rede-projeto
+      rede-projeto:
+        ipv4_address: 172.30.0.22
+
+
 
   serveproxy-loadbalancer:
     image: nginx:alpine
@@ -29,6 +34,7 @@ services:
     networks:
       - rede-projeto
 
+
   servedhcp-dns:
     image: projeto-dnsmasq:latest
     build:
@@ -37,6 +43,7 @@ services:
     networks:
       rede-projeto:
         ipv4_address: 172.30.0.10
+
 
 networks:
   rede-projeto:

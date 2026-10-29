@@ -1,0 +1,16 @@
+
+$TTL 86400
+@   IN  SOA ns.lab.test. admin.lab.test. (
+        2026102901
+        3600
+        1800
+        604800
+        86400
+)
+
+@       IN  NS  ns.lab.test.
+
+ns      IN  A   172.30.0.10
+proxy   IN  A   172.30.0.20
+http1   IN  A   172.30.0.21
+http2   IN  A   172.30.0.22
