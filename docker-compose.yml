@@ -1,6 +1,14 @@
 
 services:
  
+  servemdns:
+    build:
+      context: ./serveMDNS
+    container_name: servemdns-avahi
+    hostname: proxy
+    networks:
+      - rede-projeto
+
   servehttp-1:
     image: nginx:alpine
     container_name: servehttp-1
