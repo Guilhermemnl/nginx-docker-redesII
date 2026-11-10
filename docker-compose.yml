@@ -9,18 +9,18 @@ services:
     networks:
       - rede-projeto
 
-  servehttp-1:
+  servehttp-1abc:
     image: nginx:alpine
-    container_name: servehttp-1
+    container_name: servehttp-1abc
     volumes:
       - ./serveHTTP-1:/usr/share/nginx/html:ro
     networks:
       rede-projeto:
         ipv4_address: 172.30.0.21
 
-  servehttp-2:
+  servehttp-2abc:
     image: nginx:alpine
-    container_name: servehttp-2
+    container_name: servehttp-2abc
     volumes:
       - ./serveHTTP-2:/usr/share/nginx/html:ro
     networks:
@@ -37,8 +37,8 @@ services:
     volumes:
       - ./serveProxy-LoadBalancer/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - servehttp-1
-      - servehttp-2
+      - servehttp-1abc
+      - servehttp-2abc
     networks:
       - rede-projeto
 
